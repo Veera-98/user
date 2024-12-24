@@ -37,7 +37,6 @@ public class UserController {
 			return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
 	
 	@GetMapping("v1/users_data/search")
 	public ResponseEntity<?> getUsers(@RequestParam(value = "page", defaultValue = "1") int page,
