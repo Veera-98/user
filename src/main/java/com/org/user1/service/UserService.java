@@ -33,7 +33,7 @@ public class UserService {
 				throw new ConflictException("409 Conflict : Email address already in use");
 
 			} else if (rootcause.contains("Key (phone)")) {
-				throw new ConflictException("409 : Phone Number already in use");
+				throw new ConflictException("409 Conflict : Phone Number already in use");
 
 			}
 			throw new BadRequestException(e.getMessage());
