@@ -46,7 +46,7 @@ public class UserService {
 			return userRepository.findAll(pageable);
 
 		} catch (Exception e) {
-			throw new BadRequestException("Invalid Parameters");
+			throw new BadRequestException("Invalid query Parameters");
 		}
 
 	}
