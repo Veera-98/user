@@ -93,16 +93,6 @@ public class UserServiceTest {
 		uService.getUsers(page, limit);
 	}
 
-//	@Test
-//	public void getUsersTest2() throws BadRequestException {
-//		int page = 0;
-//		int limit = 10;
-//		uService.getUsers(page, limit);
-//		BadRequestException exception = assertThrows(BadRequestException.class, () -> {
-//			uService.getUsers(page, limit);
-//		});
-//	}
-
 	@Test
 	public void updateUserServiceTest1() throws BadRequestException, NotFoundException {
 		User user1 = new User();
