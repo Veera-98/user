@@ -25,6 +25,8 @@ import com.org.user.model.User;
 import com.org.user.repository.UserRepository;
 import com.org.user.service.UserService;
 
+
+
 public class UserServiceTest {
 
 	@InjectMocks
