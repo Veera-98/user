@@ -24,8 +24,7 @@ public class UserController {
 
 	@PostMapping("v1/users_data")
 	public ResponseEntity<?> createUser(@RequestBody User user) {
-		try {
-			
+		try {			
 			User createdUser = userService.createUserService(user);
 			Map<String, Object> response = new HashMap<>();
 			response.put("message", "201 Created: User created successfully");
