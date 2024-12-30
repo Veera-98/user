@@ -105,7 +105,7 @@ public class UserServiceTest {
 		User updatedUser  = new User();
 		updatedUser .setEmail("DINESH@GMAIL.COM");
 		updatedUser .setPhone("9874563214");
-		updatedUser .setDesignation("Tester");
+		updatedUser .setDesignation("Tester1");
 		updatedUser .setCustomerId("CUST789");
 		updatedUser .setFirstName("Veera Dinesh");
 		updatedUser .setLastName("Kumar");
@@ -151,12 +151,12 @@ public class UserServiceTest {
 	public void testUpdateUserThrowsNotFoundWhenUserDoesNotExist() throws DataIntegrityViolationException, BadRequestException {
 		User existingUser = new User();
 		existingUser.setUserId(1L);
-		existingUser.setEmail("DINESH@GMAIL.COM");
-		existingUser.setPhone("9874563214");
+		existingUser.setEmail("VEERADINESH@GMAIL.COM");
+		existingUser.setPhone("9874563216");
 
 		User updatedUser  = new User();
-		updatedUser .setEmail("DINESH@GMAIL.COM");
-		updatedUser .setPhone("9874563214");
+		updatedUser .setEmail("VEERADINESH@GMAIL.COM");
+		updatedUser .setPhone("9874563216");
 		updatedUser .setDesignation("Tester");
 		updatedUser .setCustomerId("CUST789");
 		updatedUser .setFirstName("Dinesh");
