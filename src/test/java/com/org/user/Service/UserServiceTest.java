@@ -158,7 +158,7 @@ public class UserServiceTest {
 		updatedUser .setEmail("VEERADINESH@GMAIL.COM");
 		updatedUser .setPhone("9874563216");
 		updatedUser .setDesignation("Tester");
-		updatedUser .setCustomerId("CUST789");
+		updatedUser .setCustomerId("CUST123");
 		updatedUser .setFirstName("Dinesh");
 		updatedUser .setLastName("Kumar");
 		updatedUser .setPassword("dineshpass");
