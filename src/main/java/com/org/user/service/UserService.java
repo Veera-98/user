@@ -21,12 +21,12 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public User createUserService(User u) throws BadRequestException, DataIntegrityViolationException {
+	public User createUserService(User user) throws BadRequestException, DataIntegrityViolationException {
 
 		try {
-			User u1 = userRepository.save(u);
+			User savedUser = userRepository.save(user);
 
-			return u1;
+			return savedUser;
 		} catch (DataIntegrityViolationException e) {
 			String rootcause = e.getMessage();
 			if (rootcause.contains("Key (email)")) {
@@ -51,41 +51,41 @@ public class UserService {
 
 	}
 
-	public User updateUserService(Long id, User updateUser) throws BadRequestException, NotFoundException {
+	public User updateUserService(Long id, User updatedUser) throws BadRequestException, NotFoundException {
 
 		try {
-			Optional<User> b = userRepository.findById(id);
+			Optional<User> optionalExistingUser = userRepository.findById(id);
 
-			User b1 = b.get();
+			User existingUser = optionalExistingUser.get();
 
-			if (updateUser.getDesignation() != null) {
-				b1.setDesignation(updateUser.getDesignation());
+			if (updatedUser.getDesignation() != null) {
+				existingUser.setDesignation(updatedUser.getDesignation());
 			}
-			if (updateUser.getCustomerId() != null) {
-				b1.setCustomerId(updateUser.getCustomerId());
+			if (updatedUser.getCustomerId() != null) {
+				existingUser.setCustomerId(updatedUser.getCustomerId());
 			}
-			if (updateUser.getEmail() != null) {
-				b1.setEmail(updateUser.getEmail());
+			if (updatedUser.getEmail() != null) {
+				existingUser.setEmail(updatedUser.getEmail());
 			}
-			if (updateUser.getFirstName() != null) {
-				b1.setFirstName(updateUser.getFirstName());
+			if (updatedUser.getFirstName() != null) {
+				existingUser.setFirstName(updatedUser.getFirstName());
 			}
-			if (updateUser.getLastName() != null) {
-				b1.setLastName(updateUser.getLastName());
+			if (updatedUser.getLastName() != null) {
+				existingUser.setLastName(updatedUser.getLastName());
 			}
-			if (updateUser.getPassword() != null) {
-				b1.setPassword(updateUser.getPassword());
+			if (updatedUser.getPassword() != null) {
+				existingUser.setPassword(updatedUser.getPassword());
 			}
-			if (updateUser.getPhone() != null) {
-				b1.setPhone(updateUser.getPhone());
+			if (updatedUser.getPhone() != null) {
+				existingUser.setPhone(updatedUser.getPhone());
 			}
-			if (updateUser.getRole() != null) {
-				b1.setRole(updateUser.getRole());
+			if (updatedUser.getRole() != null) {
+				existingUser.setRole(updatedUser.getRole());
 			}
-			b1.setStatus(updateUser.getStatus());
+			existingUser.setStatus(updatedUser.getStatus());
 
-			User u3 = userRepository.save(b1);
-			return u3;
+			User savedUser = userRepository.save(existingUser);
+			return savedUser;
 		} catch (DataIntegrityViolationException e) {
 			String rootcause = e.getMessage();
 			if (rootcause.contains("Key (email)")) {
@@ -102,18 +102,18 @@ public class UserService {
 				throw new NotFoundException();
 			}
 		}
-		return updateUser;
+		return updatedUser;
 	}
 
 	public User updateStatus(long user_id, String status) throws NotFoundException {
 
-		User u3 = new User();
+		User updatedUser = new User();
 		try {
-			Optional<User> b = userRepository.findById(user_id);
+			Optional<User> existingUser = userRepository.findById(user_id);
 
-			User b2 = b.get();
-			b2.setStatus(status);
-			u3 = userRepository.save(b2);
+			User user = existingUser.get();
+			user.setStatus(status);
+			updatedUser = userRepository.save(user);
 
 		} catch (Exception e) {
 			String rootcause = e.getMessage();
@@ -121,7 +121,7 @@ public class UserService {
 				throw new NotFoundException();
 			}
 		}
-		return u3;
+		return updatedUser;
 	}
 
 }

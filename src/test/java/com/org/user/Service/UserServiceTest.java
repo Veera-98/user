@@ -42,140 +42,139 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createUserServiceTest1() throws DataIntegrityViolationException, BadRequestException {
-		User u = new User();
-		u.setFirstName("Dinesh");
-		uService.createUserService(u);
+	public void testCreateUserSuccess() throws DataIntegrityViolationException, BadRequestException {
+		User newUser = new User();
+		newUser.setFirstName("Dinesh");
+		uService.createUserService(newUser);
 
 	}
 
 	@Test
-	public void createUserServiceTest2() throws DataIntegrityViolationException, BadRequestException {
-		User u = new User();
-		u.setFirstName("Dinesh");
-		when(uRepository.save(u)).thenThrow(new DataIntegrityViolationException("Key (email)"));
+	public void testCreateUserThrowsConflictOnEmailDuplication() throws DataIntegrityViolationException, BadRequestException {
+		User newUser = new User();
+		newUser.setFirstName("Dinesh");
+		when(uRepository.save(newUser)).thenThrow(new DataIntegrityViolationException("Key (email)"));
 
 		ConflictException exception = assertThrows(ConflictException.class, () -> {
-			uService.createUserService(u);
+			uService.createUserService(newUser);
 		});
 	}
 
 	@Test
-	public void createUserServiceTest3() throws DataIntegrityViolationException, BadRequestException {
-		User u = new User();
-		u.setFirstName("Dinesh");
-		when(uRepository.save(u)).thenThrow(new DataIntegrityViolationException("Key (phone)"));
+	public void testCreateUserThrowsConflictOnPhoneDuplication() throws DataIntegrityViolationException, BadRequestException {
+		User newUser = new User();
+		newUser.setFirstName("Dinesh");
+		when(uRepository.save(newUser)).thenThrow(new DataIntegrityViolationException("Key (phone)"));
 
 		ConflictException exception = assertThrows(ConflictException.class, () -> {
-			uService.createUserService(u);
+			uService.createUserService(newUser);
 		});
 	}
 
 	@Test
-	public void createUserServiceTest4() throws DataIntegrityViolationException, BadRequestException {
-		User u = new User();
-		u.setFirstName("Dinesh");
-		when(uRepository.save(u)).thenThrow(new DataIntegrityViolationException("Key (phon)"));
+	public void testCreateUserThrowsBadRequestOnUnknownKey() throws DataIntegrityViolationException, BadRequestException {
+		User  newUser= new User();
+		newUser.setFirstName("Dinesh");
+		when(uRepository.save(newUser)).thenThrow(new DataIntegrityViolationException("Key (phon)"));
 
 		BadRequestException exception = assertThrows(BadRequestException.class, () -> {
-			uService.createUserService(u);
+			uService.createUserService(newUser);
 		});
 	}
 
 	@Test
-	public void getUsersTest1() throws BadRequestException {
+	public void testGetUsersWithPagination() throws BadRequestException {
 		int page = 1;
 		int limit = 10;
 		Pageable pageable = PageRequest.of(page - 1, limit);
-		List<User> u = new ArrayList<User>();
+		List<User> userList = new ArrayList<User>();
 		User user = new User();
-		u.add(user);
-		Page<User> mockPage = new PageImpl<>(u, PageRequest.of(0, 2), 10);
+		userList.add(user);
+		Page<User> mockPage = new PageImpl<>(userList, PageRequest.of(0, 2), 10);
 		when(uRepository.findAll(pageable)).thenReturn(mockPage);
 		uService.getUsers(page, limit);
 	}
 
 	@Test
-	public void updateUserServiceTest1() throws BadRequestException, NotFoundException {
-		User user1 = new User();
-		user1.setUserId(1L);
-		user1.setEmail("DINESH@GMAIL.COM");
-		user1.setPhone("9874563214");
+	public void testUpdateUserSuccessfully() throws BadRequestException, NotFoundException {
+		User existingUser = new User();
+		existingUser.setUserId(1L);
+		existingUser.setEmail("DINESH@GMAIL.COM");
+		existingUser.setPhone("9874563214");
 
-		User user2 = new User();
-		user2.setEmail("DINESH@GMAIL.COM");
-		user2.setPhone("9874563214");
-		user2.setDesignation("Tester");
-		user2.setCustomerId("CUST789");
-		user2.setFirstName("Dinesh");
-		user2.setLastName("Kumar");
+		User updatedUser  = new User();
+		updatedUser .setEmail("DINESH@GMAIL.COM");
+		updatedUser .setPhone("9874563214");
+		updatedUser .setDesignation("Tester");
+		updatedUser .setCustomerId("CUST789");
+		updatedUser .setFirstName("Dinesh");
+		updatedUser .setLastName("Kumar");
 
-		user2.setPassword("dineshpass");
-		user2.setRole("Tester");
-		user2.setStatus("enabled");
+		updatedUser .setPassword("dineshpass");
+		updatedUser .setRole("Tester");
+		updatedUser .setStatus("enabled");
 
-		long s = 3;
-		Optional<User> o = Optional.ofNullable(user1);
-		when(uRepository.findById(s)).thenReturn(o);
-		uService.updateUserService(s, user2);
+		long userId = 3;
+		Optional<User> o = Optional.ofNullable(existingUser);
+		when(uRepository.findById(userId)).thenReturn(o);
+		uService.updateUserService(userId, updatedUser );
 
 	}
 
 	@Test
-	public void updateUserServiceTest2() throws DataIntegrityViolationException, BadRequestException {
-		User user1 = new User();
-		user1.setUserId(1L);
-		user1.setEmail("DINESH@GMAIL.COM");
-		user1.setPhone("9874563214");
+	public void testUpdateUserThrowsConflictOnEmailDuplication() throws DataIntegrityViolationException, BadRequestException {
+		User existingUser = new User();
+		existingUser.setUserId(1L);
+		existingUser.setEmail("DINESH@GMAIL.COM");
+		existingUser.setPhone("9874563214");
 
-		User user2 = new User();
-		user2.setEmail("DINESH@GMAIL.COM");
-		user2.setPhone("9874563214");
-		user2.setDesignation("Tester");
-		user2.setCustomerId("CUST789");
-		user2.setFirstName("Dinesh");
-		user2.setLastName("Kumar");
+		User updatedUser  = new User();
+		updatedUser .setEmail("DINESH@GMAIL.COM");
+		updatedUser .setPhone("9874563214");
+		updatedUser .setDesignation("Tester");
+		updatedUser .setCustomerId("CUST789");
+		updatedUser .setFirstName("Dinesh");
+		updatedUser .setLastName("Kumar");
+		updatedUser .setPassword("dineshpass");
+		updatedUser .setRole("Tester");
+		updatedUser .setStatus("enabled");
 
-		user2.setPassword("dineshpass");
-		user2.setRole("Tester");
-		user2.setStatus("enabled");
-
-		long s = 3;
-		when(uRepository.save(user2)).thenThrow(new DataIntegrityViolationException("Key (email)"));
+		long userId = 3;
+		when(uRepository.save(updatedUser)).thenThrow(new DataIntegrityViolationException("Key (email)"));
 
 		NotFoundException exception = assertThrows(NotFoundException.class, () -> {
-			uService.updateUserService(s, user2);
+			uService.updateUserService(userId, updatedUser);
 		});
 	}
 	
 	@Test
-	public void updateUserServiceTest3() throws DataIntegrityViolationException, BadRequestException {
-	    User user1 = new User();
-	    user1.setUserId(1L);
-	    user1.setEmail("DINESH@GMAIL.COM");
-	    user1.setPhone("9874563214");
+	public void testUpdateUserThrowsNotFoundWhenUserDoesNotExist() throws DataIntegrityViolationException, BadRequestException {
+		User existingUser = new User();
+		existingUser.setUserId(1L);
+		existingUser.setEmail("DINESH@GMAIL.COM");
+		existingUser.setPhone("9874563214");
 
-	    User user2 = new User();
-	    user2.setEmail("DINESH@GMAIL.COM");
-	    user2.setPhone("9874563214");
-	    user2.setDesignation("Tester");
-	    user2.setCustomerId("CUST789");
-	    user2.setFirstName("Dinesh");
-	    user2.setLastName("Kumar");
-	    user2.setPassword("dineshpass");
-	    user2.setRole("Tester");
-	    user2.setStatus("enabled");
+		User updatedUser  = new User();
+		updatedUser .setEmail("DINESH@GMAIL.COM");
+		updatedUser .setPhone("9874563214");
+		updatedUser .setDesignation("Tester");
+		updatedUser .setCustomerId("CUST789");
+		updatedUser .setFirstName("Dinesh");
+		updatedUser .setLastName("Kumar");
+		updatedUser .setPassword("dineshpass");
+		updatedUser .setRole("Tester");
+		updatedUser .setStatus("enabled");
 
-	    long s = 3;
-	    when(uRepository.findById(s)).thenReturn(Optional.empty());
+	    long userId = 3;
+	    when(uRepository.findById(userId)).thenReturn(Optional.empty());
 
 	    NotFoundException exception = assertThrows(NotFoundException.class, () -> {
-	        uService.updateUserService(s, user2);
+	        uService.updateUserService(userId, updatedUser);
 	    });
 	}
 
 	@Test
-	public void updateStatusTest1() throws NotFoundException {
+	public void testUpdateStatusSuccessfully() throws NotFoundException {
 	    User user = new User();
 	    user.setUserId(1L);
 	    user.setStatus("enabled");
@@ -190,7 +189,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void updateStatusTest2() {
+	public void testUpdateStatusThrowsNotFoundWhenUserDoesNotExist() {
 	    long userId = 1L;
 	    String status = "disabled";
 
@@ -202,7 +201,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void updateStatusTest3() throws NotFoundException {
+	public void testUpdateStatusWithNullStatus() throws NotFoundException {
 	    User user = new User();
 	    user.setUserId(1L);
 	    user.setStatus("enabled");
