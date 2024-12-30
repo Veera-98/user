@@ -105,7 +105,7 @@ public class UserServiceTest {
 		User updatedUser  = new User();
 		updatedUser .setEmail("DINESH@GMAIL.COM");
 		updatedUser .setPhone("9874563214");
-		updatedUser .setDesignation("Tester");
+		updatedUser .setDesignation("Tester1");
 		updatedUser .setCustomerId("CUST789");
 		updatedUser .setFirstName("Veera Dinesh");
 		updatedUser .setLastName("Kumar");
