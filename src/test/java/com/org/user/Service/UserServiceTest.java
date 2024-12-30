@@ -20,10 +20,10 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import com.org.user.exception.ConflictException;
-import com.org.user.model.User;
-import com.org.user.repository.UserRepository;
-import com.org.user.service.UserService;
+import com.org.user1.exception.ConflictException;
+import com.org.user1.model.User;
+import com.org.user1.repository.UserRepository;
+import com.org.user1.service.UserService;
 
 
 
