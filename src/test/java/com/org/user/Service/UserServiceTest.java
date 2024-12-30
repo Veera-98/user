@@ -52,7 +52,7 @@ public class UserServiceTest {
 	@Test
 	public void testCreateUserThrowsConflictOnEmailDuplication() throws DataIntegrityViolationException, BadRequestException {
 		User newUser = new User();
-		newUser.setFirstName("Dinesh");
+		newUser.setFirstName("Veera Dinesh");
 		when(uRepository.save(newUser)).thenThrow(new DataIntegrityViolationException("Key (email)"));
 
 		ConflictException exception = assertThrows(ConflictException.class, () -> {
