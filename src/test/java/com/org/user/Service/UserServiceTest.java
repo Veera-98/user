@@ -107,7 +107,7 @@ public class UserServiceTest {
 		updatedUser .setPhone("9874563214");
 		updatedUser .setDesignation("Tester1");
 		updatedUser .setCustomerId("CUST789");
-		updatedUser .setFirstName("Veera Dinesh");
+		updatedUser .setFirstName("Dinesh");
 		updatedUser .setLastName("Kumar");
 
 		updatedUser .setPassword("dineshpass");
