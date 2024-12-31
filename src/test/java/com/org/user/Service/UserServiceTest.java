@@ -44,7 +44,7 @@ public class UserServiceTest {
 	@Test
 	public void testCreateUserSuccess() throws DataIntegrityViolationException, BadRequestException {
 		User newUser = new User();
-		newUser.setFirstName("Dinesh");
+		newUser.setFirstName("Veera Dinesh");
 		uService.createUserService(newUser);
 
 	}
