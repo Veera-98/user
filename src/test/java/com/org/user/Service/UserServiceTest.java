@@ -74,7 +74,7 @@ public class UserServiceTest {
 	@Test
 	public void testCreateUserThrowsBadRequestOnUnknownKey() throws DataIntegrityViolationException, BadRequestException {
 		User  newUser= new User();
-		newUser.setFirstName("Dinesh");
+		newUser.setFirstName("VeeraDinesh");
 		when(uRepository.save(newUser)).thenThrow(new DataIntegrityViolationException("Key (phon)"));
 
 		BadRequestException exception = assertThrows(BadRequestException.class, () -> {
